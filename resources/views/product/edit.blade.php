@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Editar Producto')
 
@@ -90,20 +90,6 @@
             name="price"
             class="form-control"
             value="{{ old('price', $product->price) }}">
-
-    </div>
-
-    {{-- Stock --}}
-    <div class="mb-3">
-
-        <label class="form-label">
-            Stock
-        </label>
-
-        <input type="number"
-            name="stock"
-            class="form-control"
-            value="{{ old('stock', $product->stock) }}">
 
     </div>
 

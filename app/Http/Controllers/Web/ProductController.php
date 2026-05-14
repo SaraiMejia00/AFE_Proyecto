@@ -12,20 +12,129 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
-        $products = Product::with('category')->get();
-        return view('product.index', compact('products'));
+    public function index(Request $request)
+{
+    /*
+    |--------------------------------------------------------------------------
+    | Consulta productos
+    |--------------------------------------------------------------------------
+    */
+
+    $query = Product::with('category');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Buscar por nombre
+    |--------------------------------------------------------------------------
+    */
+
+    if ($request->filled('search')) {
+
+        $query->where('name', 'like',
+            '%' . $request->search . '%');
     }
 
-    // Catálogo público de la tienda
-    public function shop()
+    /*
+    |--------------------------------------------------------------------------
+    | Filtrar por categoría
+    |--------------------------------------------------------------------------
+    */
+
+    if ($request->filled('category')) {
+
+        $query->where('category_id',
+            $request->category);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Obtener productos
+    |--------------------------------------------------------------------------
+    */
+
+    $products = $query->latest()->get();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Categorías filtro
+    |--------------------------------------------------------------------------
+    */
+
+    $categories = Category::all();
+
+    return view('product.index', compact(
+        'products',
+        'categories'
+    ));
+}
+
+    // Catálogo público tienda
+    public function shop(Request $request)
     {
-        // Obtener solo productos activos
-        $products = Product::where('status', true)
-            ->latest()
-            ->get();
-        return view('product.shop', compact('products'));
+        /*
+        |--------------------------------------------------------------------------
+        | Consulta productos activos
+        |--------------------------------------------------------------------------
+        */
+
+        $query = Product::with('category')
+            ->where('status', true);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Buscar por nombre
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('search')) {
+
+            $query->where('name', 'like',
+                '%' . $request->search . '%');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Filtrar categoría
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('category')) {
+
+            $query->where('category_id',
+                $request->category);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Solo disponibles
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('available')) {
+
+            $query->where('stock', '>', 0);
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Obtener productos
+        |--------------------------------------------------------------------------
+        */
+
+        $products = $query->latest()->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Categorías filtro
+        |--------------------------------------------------------------------------
+        */
+
+        $categories = Category::all();
+
+        return view('product.shop', compact(
+            'products',
+            'categories'
+        ));
     }
 
     // Detalle producto tienda
@@ -53,7 +162,6 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'nullable',
             'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
             'image' => 'nullable|image',
             'status' => 'required'
         ]);
@@ -75,7 +183,7 @@ class ProductController extends Controller
             'slug' => Str::slug($request->name),
             'description' => $request->description,
             'price' => $request->price,
-            'stock' => $request->stock,
+            'stock' => 0,
             'image' => $imageName,
             'status' => $request->status
         ]);
@@ -100,7 +208,6 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'nullable',
             'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
             'image' => 'nullable|image',
             'status' => 'required'
         ]);
@@ -124,7 +231,6 @@ class ProductController extends Controller
             'slug' => Str::slug($request->name),
             'description' => $request->description,
             'price' => $request->price,
-            'stock' => $request->stock,
             'image' => $imageName,
             'status' => $request->status
         ]);

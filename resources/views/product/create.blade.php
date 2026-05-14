@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Crear Producto')
 
@@ -91,21 +91,6 @@
             required
             class="form-control"
             value="{{ old('price') }}">
-
-    </div>
-
-    {{-- Stock --}}
-    <div class="mb-3">
-
-        <label class="form-label">
-            Stock
-        </label>
-
-        <input type="number"
-            name="stock"
-            class="form-control"
-            required
-            value="{{ old('stock') }}">
 
     </div>
 

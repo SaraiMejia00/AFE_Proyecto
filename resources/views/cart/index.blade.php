@@ -8,6 +8,16 @@
 
 <x-success-alert />
 
+@if(session('error'))
+
+    <div class="alert alert-danger">
+
+        {{ session('error') }}
+
+    </div>
+
+@endif
+
 @if(count($cart) > 0)
 
     @php
@@ -70,7 +80,7 @@
                     {{-- Cantidad --}}
                     <td width="150">
 
-                        <form action="{{ route('cart.update', $id) }}"
+                        <form class="delete-form" action="{{ route('cart.update', $id) }}"
                             method="POST">
 
                             @csrf
@@ -107,7 +117,7 @@
                     {{-- Acciones --}}
                     <td>
 
-                        <form action="{{ route('cart.remove', $id) }}"
+                        <form class="delete-form" action="{{ route('cart.remove', $id) }}"
                             method="POST">
 
                             @csrf
@@ -135,11 +145,20 @@
     <div class="text-end">
 
         <h3>
-
             Total:
             ${{ number_format($total, 2) }}
-
         </h3>
+
+        <div class="text-end mt-3">
+
+            <a href="{{ route('checkout.index') }}"
+                class="btn btn-success">
+
+                Proceder al pago
+
+            </a>
+
+        </div>
 
     </div>
 

@@ -7,8 +7,11 @@ use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InventoryController;
 use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\CheckoutController;
+use App\Http\Controllers\Web\OrderController;
+use App\Http\Controllers\Web\AnalystController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [ProductController::class, 'shop']);
 //ruta para categorias
 Route::resource('categories', CategoryController::class);
 //ruta para productos
@@ -26,3 +29,10 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{slug}', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+//rutas para checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+//ruta de ordenes
+Route::resource('orders', OrderController::class)->only(['index','show','edit','update']);
+//rutas para analista
+Route::get('/analyst', [AnalystController::class, 'index'])->name('analyst.index');

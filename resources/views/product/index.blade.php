@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Productos')
 
@@ -13,6 +13,90 @@
 </x-page-header>
 
 <x-success-alert />
+
+{{-- Filtros búsqueda --}}
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <form method="GET"
+            action="{{ route('products.index') }}">
+
+            <div class="row">
+
+                {{-- Buscar producto --}}
+                <div class="col-md-5 mb-3">
+
+                    <label class="form-label">
+
+                        Buscar Producto
+
+                    </label>
+
+                    <input type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Buscar por nombre..."
+                        value="{{ request('search') }}">
+
+                </div>
+
+                {{-- Filtrar categoría --}}
+                <div class="col-md-5 mb-3">
+
+                    <label class="form-label">
+
+                        Categoría
+
+                    </label>
+
+                    <select name="category"
+                        class="form-select">
+
+                        <option value="">
+                            Todas las categorías
+                        </option>
+
+                        @foreach($categories as $category)
+
+                            <option
+                                value="{{ $category->id }}"
+                                {{ request('category') == $category->id ? 'selected' : '' }}>
+
+                                {{ $category->name }}
+
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+                {{-- Botones --}}
+                <div class="col-md-2 d-flex align-items-end mb-3">
+
+                    <div class="d-flex gap-2 w-100">
+
+                        <button class="btn btn-dark w-100">
+
+                            Filtrar
+
+                        </button>
+
+                        <a href="{{ route('products.index') }}"
+                            class="btn btn-secondary">
+
+                            X
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
 
 <table class="table table-bordered table-hover">
 
@@ -60,7 +144,40 @@
                 <td>
                     ${{ number_format($product->price, 2) }}
                 </td>
-                <td>{{ $product->stock }}</td>
+
+                <td>
+
+                    {{-- Stock crítico --}}
+                    @if($product->stock <= 5)
+
+                        <span class="badge bg-danger">
+
+                            {{ $product->stock }}
+
+                        </span>
+
+                    {{-- Stock medio --}}
+                    @elseif($product->stock <= 15)
+
+                        <span class="badge bg-warning text-dark">
+
+                            {{ $product->stock }}
+
+                        </span>
+
+                    {{-- Stock normal --}}
+                    @else
+
+                        <span class="badge bg-success">
+
+                            {{ $product->stock }}
+
+                        </span>
+
+                    @endif
+
+                </td>
+                
                 <td>
                     @if($product->status)
 
@@ -82,7 +199,7 @@
                         Editar
                     </a>
 
-                    <form action="{{ route('products.destroy', $product->id) }}"
+                    <form class="delete-form" action="{{ route('products.destroy', $product->id) }}"
                         method="POST">
                         @csrf
                         @method('DELETE')

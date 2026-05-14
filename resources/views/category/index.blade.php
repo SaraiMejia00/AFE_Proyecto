@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Categorías')
 
@@ -48,7 +48,7 @@
 
                     </a>
 
-                    <form action="{{ route('categories.destroy', $category->id) }}"
+                    <form class="delete-form" action="{{ route('categories.destroy', $category->id) }}"
                         method="POST">
 
                         @csrf

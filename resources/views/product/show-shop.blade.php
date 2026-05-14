@@ -46,10 +46,25 @@
 
         {{-- Stock --}}
         <p>
-
             Stock disponible:
-            <strong>{{ $product->stock }}</strong>
+            {{-- Sin stock --}}
+            @if($product->stock <= 0)
+                <span class="badge bg-danger">
+                    Agotado
+                </span>
 
+            {{-- Stock bajo --}}
+            @elseif($product->stock <= 5)
+                <span class="badge bg-warning text-dark">
+                    Últimas unidades ({{ $product->stock }})
+                </span>
+
+            {{-- Stock normal --}}
+            @else
+                <span class="badge bg-success">
+                    {{ $product->stock }} disponibles
+                </span>
+            @endif
         </p>
 
         {{-- Descripción --}}
@@ -72,12 +87,31 @@
                 Volver
             </a>
             
-            <form action="{{ route('cart.add', $product->slug) }}" method="POST">
-            @csrf
-                <button class="btn btn-dark">
-                    Agregar al carrito
+            @if($product->stock > 0)
+
+                <form action="{{ route('cart.add', $product->slug) }}"
+                    method="POST">
+
+                    @csrf
+
+                    <button class="btn btn-dark">
+
+                        Agregar al carrito
+
+                    </button>
+
+                </form>
+
+            @else
+
+                <button class="btn btn-secondary"
+                    disabled>
+
+                    Producto Agotado
+
                 </button>
-            </form>
+
+            @endif
             
         </div>
     </div>
