@@ -99,7 +99,21 @@ class CheckoutController extends Controller
         // Vaciar carrito
         session()->forget('cart');
 
-        return redirect()->route('orders.show', $order->id)
+        return redirect()->route('checkout.success', $order->id)
             ->with('success', 'Compra realizada correctamente');
+    }
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Confirmación compra cliente
+    |--------------------------------------------------------------------------
+    */
+    public function success(string $id)
+    {
+        // Buscar pedido
+        $order = Order::with('items.product')
+            ->findOrFail($id);
+
+        return view('order.success', compact('order'));
     }
 }

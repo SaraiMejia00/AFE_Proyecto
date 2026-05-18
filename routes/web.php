@@ -10,29 +10,53 @@ use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Web\CheckoutController;
 use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\AnalystController;
+use App\Http\Controllers\Web\AuthController;
 
+//rutas de autenticación
+Route::get('/login',[AuthController::class, 'login'])->name('login');
+Route::post('/authenticate',[AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+//ruta de vista de tienda
 Route::get('/', [ProductController::class, 'shop']);
-//ruta para categorias
-Route::resource('categories', CategoryController::class);
-//ruta para productos
-Route::resource('products', ProductController::class);
-//ruta para dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//ruta para movimientos de inventario
-Route::resource('inventory', InventoryController::class)->only(['index', 'create', 'store']);
 //ruta para catálogo público
 Route::get('/shop', [ProductController::class, 'shop'])->name('products.shop');
 //ruta para detalle producto público
 Route::get('/shop/{slug}', [ProductController::class, 'showShop'])->name('products.show-shop');
-// Rutas para carrito de compras
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{slug}', [CartController::class, 'add'])->name('cart.add');
-Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-//rutas para checkout
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
-//ruta de ordenes
-Route::resource('orders', OrderController::class)->only(['index','show','edit','update']);
-//rutas para analista
-Route::get('/analyst', [AnalystController::class, 'index'])->name('analyst.index');
+/*
+|--------------------------------------------------------------------------
+| Cliente autenticado
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['checkrole:customer'])
+    ->group(function () {
+        Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
+        Route::post('/cart/add/{slug}',[CartController::class, 'add'])->name('cart.add');
+        Route::delete('/cart/remove/{id}',[CartController::class, 'remove'])->name('cart.remove');
+        Route::put('/cart/update/{id}',[CartController::class, 'update'])->name('cart.update');
+        Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout.index');
+        Route::post('/checkout/process',[CheckoutController::class, 'process'])->name('checkout.process');
+        Route::get('/order-success/{id}',[CheckoutController::class, 'success'])->name('checkout.success');
+    });
+/*
+|--------------------------------------------------------------------------
+| Rutas Administrativas
+*/
+Route::middleware(['checkrole:admin,manager'])->group(function () {
+        Route::resource('categories',CategoryController::class);
+        Route::resource('products',ProductController::class);
+        Route::resource('inventory',InventoryController::class)->only(['index','create','store']);
+        Route::resource('orders',OrderController::class)->only(['index','show','edit','update']);
+    });
+/*
+|--------------------------------------------------------------------------
+| Analista
+*/
+Route::middleware(['checkrole:admin,analyst'])->group(function () {
+        Route::get('/analyst',[AnalystController::class, 'index'])->name('analyst.index');
+
+    });
+
+Route::middleware(['checkrole:admin,analyst'])->group(function () {
+        Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+
+    });

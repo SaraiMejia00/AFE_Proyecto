@@ -38,15 +38,16 @@
             {{-- Navegación --}}
             <ul class="nav flex-column gap-2">
 
-                {{-- Dashboard --}}
+
+                {{-- Categorías --}}
                 <li class="nav-item">
 
-                    <a href="{{ route('dashboard') }}"
-                        class="nav-link text-white {{ request()->routeIs('dashboard') ? 'bg-secondary rounded' : '' }}">
+                    <a href="{{ route('categories.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('categories.*') ? 'bg-secondary rounded' : '' }}">
 
-                        <i class="bi bi-speedometer2"></i>
+                        <i class="bi bi-tags"></i>
 
-                        Dashboard
+                        Categorías
 
                     </a>
 
@@ -61,20 +62,6 @@
                         <i class="bi bi-box"></i>
 
                         Productos
-
-                    </a>
-
-                </li>
-
-                {{-- Categorías --}}
-                <li class="nav-item">
-
-                    <a href="{{ route('categories.index') }}"
-                        class="nav-link text-white {{ request()->routeIs('categories.*') ? 'bg-secondary rounded' : '' }}">
-
-                        <i class="bi bi-tags"></i>
-
-                        Categorías
 
                     </a>
 
@@ -117,6 +104,20 @@
                         <i class="bi bi-graph-up"></i>
 
                         Analista
+
+                    </a>
+
+                </li>
+
+                {{-- Dashboard --}}
+                <li class="nav-item">
+
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link text-white {{ request()->routeIs('dashboard') ? 'bg-secondary rounded' : '' }}">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
 
                     </a>
 
