@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
         /*
         |--------------------------------------------------------------------------
-        | Usuario Admin
+        | Usuario Administrador
         |--------------------------------------------------------------------------
         */
         User::create([
@@ -49,7 +49,6 @@ class UserSeeder extends Seeder
         | Usuario Customer
         |--------------------------------------------------------------------------
         */
-
         User::create([
             'name' => 'Cliente',
             'email' => 'customer@tienda.com',
