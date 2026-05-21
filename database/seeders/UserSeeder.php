@@ -44,7 +44,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('ITCA789'),
             'role_id' => Role::where('name', 'analyst')->first()->id
         ]);
-
         /*
         |--------------------------------------------------------------------------
         | Usuario Customer
