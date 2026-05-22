@@ -192,9 +192,13 @@
                     @endif
 
                 </td>
-                <td class="d-flex gap-2">
+                <td class="d-flex gap-2 align-items-center">
 
-                    <a href="{{ route('products.edit', $product->id) }}"
+                    <x-actions
+                        :editRoute="route('products.edit', $product->id)"
+                        :deleteRoute="route('products.destroy', $product->id)" 
+                    />
+                   <!-- <a href="{{ route('products.edit', $product->id) }}"
                         class="btn btn-warning btn-sm">
                         Editar
                     </a>
@@ -206,7 +210,7 @@
                         <button class="btn btn-danger btn-sm">
                             Eliminar
                         </button>
-                    </form>
+                    </form>-->
                 </td>
             </tr>
         @empty

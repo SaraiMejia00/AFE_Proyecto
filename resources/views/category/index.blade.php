@@ -39,9 +39,14 @@
 
                 <td>{{ $category->description }}</td>
 
-                <td class="d-flex gap-2">
+                <td class="d-flex gap-2 align-items-center">
 
-                    <a href="{{ route('categories.edit', $category->id) }}"
+                    <x-actions
+                        :editRoute="route('categories.edit', $category->id)"
+                        :deleteRoute="route('categories.destroy', $category->id)" 
+                    />
+
+                    <!--<a href="{{ route('categories.edit', $category->id) }}"
                         class="btn btn-warning btn-sm">
 
                         Editar
@@ -58,7 +63,7 @@
                             Eliminar
                         </button>
 
-                    </form>
+                    </form>-->
 
                 </td>
 
