@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
         /*
         |--------------------------------------------------------------------------
-        | Usuario Admin
+        | Usuario Administrador
         |--------------------------------------------------------------------------
         */
         User::create([
@@ -44,13 +44,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('ITCA789'),
             'role_id' => Role::where('name', 'analyst')->first()->id
         ]);
-
         /*
         |--------------------------------------------------------------------------
         | Usuario Customer
         |--------------------------------------------------------------------------
         */
-
         User::create([
             'name' => 'Cliente',
             'email' => 'customer@tienda.com',
