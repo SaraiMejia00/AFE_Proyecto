@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Manager',
             'email' => 'manager@tienda.com',
-            'password' => Hash::make('ITCA456'),
+            'password' => Hash::make('ITCA457'),
             'role_id' => Role::where('name', 'manager')->first()->id
         ]);
         /*
