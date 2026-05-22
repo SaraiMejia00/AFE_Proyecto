@@ -107,7 +107,7 @@
 
     </div>
 
-    {{-- Estado --}}
+    <!--{{-- Estado --}}
     <div class="mb-4">
 
         <label class="form-label">
@@ -124,9 +124,9 @@
                 Inactivo
             </option>
 
-        </select>
+        </select> 
 
-    </div>
+    </div>-->
 
     <button class="btn btn-primary">
         Guardar

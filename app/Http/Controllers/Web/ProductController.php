@@ -162,8 +162,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'description' => 'nullable',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image',
-            'status' => 'required'
+            'image' => 'nullable|image'
         ]);
 
         $imageName = null;
@@ -185,7 +184,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stock' => 0,
             'image' => $imageName,
-            'status' => $request->status
+            'status' => True
         ]);
 
         return redirect()->route('products.index')
