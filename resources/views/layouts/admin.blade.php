@@ -5,47 +5,39 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>@yield('title')</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
 <body class="bg-light">
 
-    <div class="d-flex">
+    <div class="d-flex align-items-stretch">
 
-        {{-- Sidebar --}}
-        <aside class="bg-dark text-white p-3"
-            style="width: 260px; min-height: 100vh;">
+        <aside class="collapse collapse-horizontal show text-bg-dark p-3 shadow-lg" id="menuLateral"
+            style="width: 230px; min-height: 100vh;">
 
             {{-- Logo --}}
-            <h3 class="mb-4">
-
-                TiendaOnline
-
-            </h3>
+            <div class="d-flex align-items-center mb-4 pb-3 border-bottom border-secondary">
+                <i class="bi bi-cart-fill fs-4 me-2 text-info"></i>
+                <h5 class="mb-0 fw-bold">TiendaOnline</h5>
+            </div>
 
             {{-- Navegación --}}
             <ul class="nav flex-column gap-2">
-
 
                 {{-- Categorías --}}
                 <li class="nav-item">
 
                     <a href="{{ route('categories.index') }}"
-                        class="nav-link text-white {{ request()->routeIs('categories.*') ? 'bg-secondary rounded' : '' }}">
+                        class="nav-link text-white d-flex align-items-center {{ request()->routeIs('categories.*') ? 'bg-secondary rounded shadow-sm' : '' }}">
 
-                        <i class="bi bi-tags"></i>
+                        <i class="bi bi-tags me-2"></i>
 
                         Categorías
 
@@ -57,9 +49,9 @@
                 <li class="nav-item">
 
                     <a href="{{ route('products.index') }}"
-                        class="nav-link text-white {{ request()->routeIs('products.*') ? 'bg-secondary rounded' : '' }}">
+                        class="nav-link text-white d-flex align-items-center {{ request()->routeIs('products.*') ? 'bg-secondary rounded shadow-sm' : '' }}">
 
-                        <i class="bi bi-box"></i>
+                        <i class="bi bi-box me-2"></i>
 
                         Productos
 
@@ -71,9 +63,9 @@
                 <li class="nav-item">
 
                     <a href="{{ route('inventory.index') }}"
-                        class="nav-link text-white {{ request()->routeIs('inventory.*') ? 'bg-secondary rounded' : '' }}">
+                        class="nav-link text-white d-flex align-items-center {{ request()->routeIs('inventory.*') ? 'bg-secondary rounded shadow-sm' : '' }}">
 
-                        <i class="bi bi-box-seam"></i>
+                        <i class="bi bi-box-seam me-2"></i>
 
                         Inventario
 
@@ -85,9 +77,9 @@
                 <li class="nav-item">
 
                     <a href="{{ route('orders.index') }}"
-                        class="nav-link text-white {{ request()->routeIs('orders.*') ? 'bg-secondary rounded' : '' }}">
+                        class="nav-link text-white d-flex align-items-center {{ request()->routeIs('orders.*') ? 'bg-secondary rounded shadow-sm' : '' }}">
 
-                        <i class="bi bi-bag-check"></i>
+                        <i class="bi bi-bag-check me-2"></i>
 
                         Pedidos
 
@@ -99,9 +91,9 @@
                 <li class="nav-item">
 
                     <a href="{{ route('analyst.index') }}"
-                        class="nav-link text-white {{ request()->routeIs('analyst.*') ? 'bg-secondary rounded' : '' }}">
+                        class="nav-link text-white d-flex align-items-center {{ request()->routeIs('analyst.*') ? 'bg-secondary rounded shadow-sm' : '' }}">
 
-                        <i class="bi bi-graph-up"></i>
+                        <i class="bi bi-graph-up me-2"></i>
 
                         Analista
 
@@ -113,9 +105,9 @@
                 <li class="nav-item">
 
                     <a href="{{ route('dashboard') }}"
-                        class="nav-link text-white {{ request()->routeIs('dashboard') ? 'bg-secondary rounded' : '' }}">
+                        class="nav-link text-white d-flex align-items-center {{ request()->routeIs('dashboard') ? 'bg-secondary rounded shadow-sm' : '' }}">
 
-                        <i class="bi bi-speedometer2"></i>
+                        <i class="bi bi-speedometer2 me-2"></i>
 
                         Dashboard
 
@@ -124,12 +116,12 @@
                 </li>
 
                 {{-- Tienda --}}
-                <li class="nav-item mt-4">
+                <li class="nav-item mt-4 pt-3 border-top border-secondary">
 
                     <a href="{{ route('products.shop') }}"
-                        class="nav-link text-white">
+                        class="nav-link text-white bg-dark border border-secondary rounded d-flex align-items-center justify-content-center mt-2 shadow-sm">
 
-                        <i class="bi bi-shop"></i>
+                        <i class="bi bi-shop me-2 text-info"></i>
 
                         Ir a Tienda
 
@@ -141,19 +133,31 @@
 
         </aside>
 
-        {{-- Contenido --}}
-        <main class="flex-grow-1 p-4">
+        {{-- para que el footer se mantenga en la parte inferior de la pantalla--}}
+        <main class="flex-grow-1 p-4 bg-white m-3 rounded shadow-sm border d-flex flex-column" style="min-width: 0;">
+
+            {{-- Dispara la acción sobre el objetivo #menuLateral --}}
+            <div class="mb-4">
+                <button class="btn btn-outline-secondary d-flex align-items-center" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#menuLateral" aria-expanded="true"
+                    aria-controls="menuLateral">
+                    <i class="bi bi-list fs-5 me-2"></i> Menú
+                </button>
+            </div>
 
             @yield('content')
+
+            {{-- Footer --}}
+            <footer class="mt-auto pt-3 border-top text-center text-secondary">
+                <small> TiendaOnline 2026 | v1.0.0</small>
+            </footer>
 
         </main>
 
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <x-confirm-delete />
