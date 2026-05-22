@@ -4,80 +4,78 @@
 
 @section('content')
 
-<div class="row justify-content-center">
+    <div class="row justify-content-center mt-5">
 
-    <div class="col-md-5">
+        <div class="col-md-4">
 
-        <div class="card shadow-sm border-0">
+            <div class="card shadow-sm border-0 rounded-4">
 
-            <div class="card-body p-4">
+                <div class="card-body p-8">
 
-                <h2 class="mb-4 text-center">
+                    <div class="text-center mb-4">
 
-                    Iniciar Sesión
+                        {{-- Imagen de Perfil --}}
+                        <div class="mb-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Icono de Usuario"
+                                class="rounded-circle img-thumbnail shadow-sm"
+                                style="width: 100px; height: 100px; object-fit: cover; background-color: white;">
+                        </div>
 
-                </h2>
-
-                {{-- Error login --}}
-                @if(session('error'))
-
-                    <div class="alert alert-danger">
-
-                        {{ session('error') }}
-
+                        <h4 class="text-center fw-bold">
+                            Iniciar Sesión
+                        </h4>
                     </div>
 
-                @endif
+                    {{-- Error login --}}
+                    @if(session('error'))
 
-                <form action="{{ route('authenticate') }}"
-                    method="POST">
+                        <div class="alert alert-danger d-flex align-items-center rounded-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            {{ session('error') }}
+                        </div>
 
-                    @csrf
+                    @endif
 
-                    {{-- Email --}}
-                    <div class="mb-3">
+                    <form action="{{ route('authenticate') }}" method="POST">
 
-                        <label class="form-label">
+                        @csrf
 
-                            Email
+                        {{-- Email --}}
+                        <div class="mb-3">
 
-                        </label>
+                            <label class="form-label fw-semibold">
+                                Email
+                            </label>
 
-                        <input type="email"
-                            name="email"
-                            class="form-control">
+                            <input type="email" name="email" class="form-control rounded-3" placeholder="correo@ejemplo.com"
+                                required autofocus>
 
-                    </div>
+                        </div>
 
-                    {{-- Password --}}
-                    <div class="mb-4">
+                        {{-- Password --}}
+                        <div class="mb-4">
 
-                        <label class="form-label">
+                            <label class="form-label fw-semibold">
+                                Contraseña
+                            </label>
 
-                            Contraseña
+                            <input type="password" name="password" class="form-control rounded-3" placeholder="••••••••"
+                                required>
 
-                        </label>
+                        </div>
 
-                        <input type="password"
-                            name="password"
-                            class="form-control">
+                        <button class="btn btn-dark w-100 py-2 fw-bold shadow-sm rounded-3">
+                            Ingresar
+                        </button>
 
-                    </div>
+                    </form>
 
-                    <button class="btn btn-dark w-100">
-
-                        Ingresar
-
-                    </button>
-
-                </form>
+                </div>
 
             </div>
 
         </div>
 
     </div>
-
-</div>
 
 @endsection
