@@ -18,8 +18,8 @@ Se ha trabajo bajo la metodologia de SCRUM
 Roles:
 
 Cesar Roque - Product Owner
-Sarai Mejia - Scrum Master
+Clarissa Hernández - Scrum Master
 Rodrigo Martínez - Developer
-Clarissa Hernández - Developer
+Sarai Mejia - Developer
 
  
