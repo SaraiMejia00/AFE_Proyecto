@@ -3,9 +3,12 @@
 @section('title', 'Carrito')
 
 @section('content')
-
-<x-page-header title="Carrito de Compras" />
-
+<div class="d-flex left-content-between mb-4">
+<x-back route="products.shop" />
+<div class="mb-0">
+        <x-page-header title="Carrito de Compras" />
+</div>
+</div>
 <x-success-alert />
 
 @if(session('error'))
@@ -23,7 +26,7 @@
     @php
         $total = 0;
     @endphp
-
+  
     <table class="table table-bordered align-middle">
 
         <thead class="table-dark">

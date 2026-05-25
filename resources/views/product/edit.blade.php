@@ -4,6 +4,7 @@
 
 @section('content')
 
+<x-back route="products.index" />
 <x-page-header title="Editar Producto" />
 
 <form action="{{ route('products.update', $product->id) }}"

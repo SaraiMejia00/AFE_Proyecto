@@ -228,7 +228,7 @@ class ProductController extends Controller
 
             $imageName = time() . '_' . $image->getClientOriginalName();
 
-            $image->move(public_path('products'), $imageName);
+            $image->move(public_path('product_images'), $imageName);
         }
 
         $product->update([

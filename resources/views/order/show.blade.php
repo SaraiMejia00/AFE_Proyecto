@@ -4,6 +4,7 @@
 
 @section('content')
 
+<x-back route="orders.index" />
 <x-page-header title="Pedido Realizado" />
 
 <x-success-alert />
