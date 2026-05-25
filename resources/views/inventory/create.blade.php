@@ -3,7 +3,7 @@
 @section('title', 'Nuevo Movimiento')
 
 @section('content')
-
+<x-back route="inventory.index" />
 <x-page-header title="Nuevo Movimiento Inventario" />
 
 {{-- Error de stock insuficiente --}}

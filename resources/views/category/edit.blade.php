@@ -4,6 +4,7 @@
 
 @section('content')
 
+<x-back route="categories.index" />
 <h1 class="mb-4">Editar Categoría</h1>
 
 <form action="{{ route('categories.update', $category->id) }}"
