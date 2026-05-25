@@ -6,7 +6,7 @@
 
 <div class="row justify-content-center mt-5">
 
-    <div class="col-md-4">
+    <div class="col-11 col-sm-8 col-md-6 col-lg-4">
 
         <div class="card shadow-sm border-0 rounded-4">
 
@@ -67,6 +67,15 @@
                     <button class="btn btn-dark w-100 py-2 fw-bold shadow-sm rounded-3">
                         Ingresar
                     </button>
+                    <div class="text-center mt-4">
+                        <small class="text-secondary">
+                            ¿No tienes cuenta?
+                            <a href="{{ route('register') }}"
+                            class="text-dark fw-bold text-decoration-none">
+                                Crear cuenta
+                            </a>
+                        </small>
+                    </div>
 
                 </form>
 
