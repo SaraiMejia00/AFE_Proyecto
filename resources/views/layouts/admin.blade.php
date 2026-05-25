@@ -134,6 +134,27 @@
 
                 </li>
 
+                {{-- Cerrar Sesión --}}
+                <li class="nav-item mt-3">
+
+                    <form action="{{ route('logout') }}" method="POST">
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="nav-link w-100 text-start text-white bg-danger border-0 rounded d-flex align-items-center shadow-sm">
+
+                            <i class="bi bi-box-arrow-right me-2"></i>
+
+                            Cerrar Sesión
+
+                        </button>
+
+                    </form>
+
+                </li>
+
             </ul>
 
         </aside>

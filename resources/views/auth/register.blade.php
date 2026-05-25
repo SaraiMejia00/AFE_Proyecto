@@ -14,7 +14,6 @@
 
                 <div class="text-center mb-4">
 
-                    {{-- Imagen Perfil --}}
                     <div class="mb-3">
 
                         <img
