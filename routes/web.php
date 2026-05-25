@@ -11,11 +11,18 @@ use App\Http\Controllers\Web\CheckoutController;
 use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\AnalystController;
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\RegisterController;
 
 //rutas de autenticación
 Route::get('/login',[AuthController::class, 'login'])->name('login');
 Route::post('/authenticate',[AuthController::class, 'authenticate'])->name('authenticate');
 Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+//rutas de registro
+Route::get('/register', [RegisterController::class, 'create'])
+    ->name('register');
+
+Route::post('/register', [RegisterController::class, 'store'])
+    ->name('register.store');
 //ruta de vista de tienda
 Route::get('/', [ProductController::class, 'shop']);
 //ruta para catálogo público
