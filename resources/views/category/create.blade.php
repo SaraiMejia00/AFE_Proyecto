@@ -3,7 +3,7 @@
 @section('title', 'Crear Categoría')
 
 @section('content')
-
+<x-back route="categories.index" />
 <h1 class="mb-4">Crear Categoría</h1>
 
 <form action="{{ route('categories.store') }}" method="POST">

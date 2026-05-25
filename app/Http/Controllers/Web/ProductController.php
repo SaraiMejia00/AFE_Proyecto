@@ -158,12 +158,19 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_id' => 'nullable|exists:categories,id',
-            'name' => 'required|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|max:255 |unique:products,name',
             'description' => 'nullable',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0.01',
             'image' => 'nullable|image'
+        ],
+        [
+
+            'name.unique' => 'Ya existe un producto con ese nombre. Ingrese un nombre diferente.',
+            'category_id.required' => 'La categoría es obligatoria.',
+            'price.min' => 'El precio debe ser mayor a 0.'
         ]);
+
 
         $imageName = null;
 
@@ -221,7 +228,7 @@ class ProductController extends Controller
 
             $imageName = time() . '_' . $image->getClientOriginalName();
 
-            $image->move(public_path('products'), $imageName);
+            $image->move(public_path('product_images'), $imageName);
         }
 
         $product->update([

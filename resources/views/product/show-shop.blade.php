@@ -3,7 +3,7 @@
 @section('title', $product->name)
 
 @section('content')
-
+<x-back route="products.shop" />
 <div class="row">
 
     {{-- Imagen --}}
@@ -14,7 +14,6 @@
             <img
                 src="{{ asset('product_images/' . $product->image) }}"
                 class="img-fluid rounded shadow-sm">
-
         @endif
 
     </div>

@@ -12,7 +12,7 @@
 
 <form action="{{ $deleteRoute }}"
       method="POST"
-      class="d-inline">
+      class="delete-form">
 
     @csrf
     @method('DELETE')

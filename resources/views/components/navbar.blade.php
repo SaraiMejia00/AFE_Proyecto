@@ -62,38 +62,48 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2">
 
                             {{-- Panel según rol --}}
-                            @if(
-                                    Auth::user()->role?->name === 'admin' ||
-                                    Auth::user()->role?->name === 'manager'
-                                )
-
+                            {{-- Admin --}}
+                            @if(Auth::user()->role?->name === 'admin')
                                 <li>
 
-                                    <a class="dropdown-item d-flex align-items-center gap-2 py-2"
-                                        href="{{ route('dashboard') }}">
+                                    <a class="dropdown-item"
+                                        href="{{ route('categories.index') }}">
 
-                                        <i class="fas fa-tachometer-alt text-muted"></i> Panel Administrativo
+                                        Panel Administrativo
 
                                     </a>
 
                                 </li>
-
                             @endif
 
-                            {{-- Panel analista --}}
-                            @if(Auth::user()->role?->name === 'analyst')
 
+                            {{-- Manager --}}
+                            @if(Auth::user()->role?->name === 'manager')
                                 <li>
 
-                                    <a class="dropdown-item d-flex align-items-center gap-2 py-2"
-                                        href="{{ route('analyst.index') }}">
+                                    <a class="dropdown-item"
+                                        href="{{ route('categories.index') }}">
 
-                                        <i class="fas fa-chart-line text-muted"></i> Panel Analista
+                                        Panel Administrativo
 
                                     </a>
 
                                 </li>
+                            @endif
 
+
+                            {{-- Analista --}}
+                            @if(Auth::user()->role?->name === 'analyst')
+                                <li>
+
+                                    <a class="dropdown-item"
+                                        href="{{ route('analyst.index') }}">
+
+                                        Panel Analista
+
+                                    </a>
+
+                                </li>
                             @endif
 
                             <li>
