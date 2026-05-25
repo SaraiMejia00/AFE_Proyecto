@@ -45,7 +45,8 @@ class CheckRole
 
         if (!in_array($userRole, $roles)) {
 
-            abort(403, 'Acceso no autorizado');
+            return response()
+            ->view('auth.forbidden', [], 403);
         }
 
         return $next($request);

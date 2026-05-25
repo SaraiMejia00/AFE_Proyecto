@@ -34,7 +34,7 @@ Route::get('/shop/{slug}', [ProductController::class, 'showShop'])->name('produc
 | Cliente autenticado
 |--------------------------------------------------------------------------
 */
-Route::middleware(['checkrole:customer'])
+Route::middleware(['checkrole:admin,manager,analyst,customer'])
     ->group(function () {
         Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
         Route::post('/cart/add/{slug}',[CartController::class, 'add'])->name('cart.add');
